@@ -1,0 +1,22 @@
+---
+name: 'Repository Dispatch Annotation Action'
+description: |
+  Writes a `GITHUB_STEP_SUMMARY` with data provided in the `dispatched_by` key in the `client_payload` data of a
+  repository dispatch event
+
+branding:
+  icon: map-pin
+  color: purple
+
+runs:
+  using: "composite"
+  steps:
+    - id: annotate
+      if: ${{ github.event.client_payload.dispatched_by }}
+      name: "${{ github.event.client_payload.dispatched_by }}"
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        echo "# 🚢 Dispatched by" | tee -a "${GITHUB_STEP_SUMMARY}"
+        echo "${{ github.event.client_payload.dispatched_by }}" | tee -a "${GITHUB_STEP_SUMMARY}"

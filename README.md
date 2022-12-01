@@ -1,2 +1,3 @@
 # dispatch-annotation-action
-Annotates the workflow (STEP_SUMMARY) with the `dispatched_by` information
+Writes a `GITHUB_STEP_SUMMARY` with data provided in the `dispatched_by` key in the `client_payload` data of a
+repository dispatch event
